@@ -12,7 +12,6 @@ public class AppDatabaseProvider {
     public static AppDatabase getInstance(Context context) {
         if (instance == null)
             instance = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                    .allowMainThreadQueries()
                     .build();
         return instance;
     }

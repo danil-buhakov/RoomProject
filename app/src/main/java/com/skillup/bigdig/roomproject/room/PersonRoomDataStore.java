@@ -3,11 +3,14 @@ package com.skillup.bigdig.roomproject.room;
 import android.content.Context;
 
 import com.skillup.bigdig.roomproject.entity.Person;
-import com.skillup.bigdig.roomproject.view.IDataStore;
 
 import java.util.List;
 
-public class PersonRoomDataStore implements IDataStore {
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import io.reactivex.functions.Action;
+
+public class PersonRoomDataStore {
 
     private PersonDAO personDAO;
 
@@ -15,18 +18,15 @@ public class PersonRoomDataStore implements IDataStore {
         personDAO = AppDatabaseProvider.getInstance(context).personDAO();
     }
 
-    @Override
-    public void addPerson(Person person) {
-        personDAO.insert(person);
+    public Completable addPerson(Person person) {
+        return Completable.fromAction(() -> personDAO.insert(person));
     }
 
-    @Override
-    public void deletePerson(Person person) {
-        personDAO.delete(person);
+    public Completable deletePerson(Person person) {
+        return Completable.fromAction(() -> personDAO.delete(person));
     }
 
-    @Override
-    public List<Person> getAll() {
+    public Single<List<Person>> getAll() {
         return personDAO.getAll();
     }
 }

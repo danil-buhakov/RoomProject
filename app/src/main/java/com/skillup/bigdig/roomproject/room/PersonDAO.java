@@ -10,13 +10,15 @@ import com.skillup.bigdig.roomproject.entity.Person;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 @Dao
 public interface PersonDAO {
     @Query("SELECT * FROM person")
-    List<Person> getAll();
+    Single<List<Person>> getAll();
 
     @Query("SELECT * FROM person WHERE id = :id")
-    Person getById(long id);
+    Single<Person> getById(long id);
 
     @Insert
     void insert(Person employee);
