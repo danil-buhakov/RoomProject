@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.skillup.bigdig.roomproject.R;
+import com.skillup.bigdig.roomproject.di.DaggerRoomComponent;
+import com.skillup.bigdig.roomproject.di.RoomModule;
 import com.skillup.bigdig.roomproject.entity.Person;
 import com.skillup.bigdig.roomproject.room.PersonRoomDataStore;
 
@@ -32,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        dataStore = new PersonRoomDataStore(this);
+        dataStore = DaggerRoomComponent.builder()
+                .roomModule(new RoomModule(this))
+                .build().getRoomDataStore();
         compositeDisposable = new CompositeDisposable();
     }
 

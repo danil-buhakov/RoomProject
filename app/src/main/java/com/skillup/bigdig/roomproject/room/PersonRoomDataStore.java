@@ -6,6 +6,8 @@ import com.skillup.bigdig.roomproject.entity.Person;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.functions.Action;
